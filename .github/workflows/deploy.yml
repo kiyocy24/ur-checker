@@ -28,4 +28,4 @@ jobs:
       uses: 'google-github-actions/deploy-cloud-functions@v0'
       with:
         name: 'urChecker'
-        runtime: 'go16'
+        runtime: 'go116'
