@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	functions.CloudEvent("URChecker", urChecker)
+	functions.CloudEvent("urChecker", urChecker)
 }
 
 type MessagePublishedData struct {
