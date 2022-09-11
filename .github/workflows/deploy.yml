@@ -2,14 +2,11 @@ name: Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "github-actions" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: urchecker
 
     permissions:
       contents: 'read'
@@ -27,6 +24,11 @@ jobs:
     - id: 'deploy'
       uses: 'google-github-actions/deploy-cloud-functions@v0'
       with:
-        name: 'urChecker'
+        name: 'urchecker'
         runtime: 'go116'
         region: 'asia-northeast1'
+        entry_point: 'urChecker'
+        source_dir: 'urchecker'
+        event_trigger_type: 'providers/cloud.pubsub/eventTypes/topic.publish'
+        event_trigger_resource: '${{ secrets.DEPLOY_CF_EVENT_PUBSUB_TOPIC }}'
+
