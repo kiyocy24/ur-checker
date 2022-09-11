@@ -7,9 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: urchecker
 
     permissions:
       contents: 'read'
@@ -29,3 +26,5 @@ jobs:
       with:
         name: 'urChecker'
         runtime: 'go116'
+        region: 'asia-northeast1'
+        source_dir: urchecker
