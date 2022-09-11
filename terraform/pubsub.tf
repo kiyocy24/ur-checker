@@ -1,3 +1,3 @@
-resource "google_pubsub_topic" "urchecker-topic" {
+resource "google_pubsub_topic" "urchecker" {
   name = "urchecker"
 }
