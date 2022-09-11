@@ -1,7 +1,7 @@
 resource "google_cloud_scheduler_job" "urchecker" {
   name        = "urchecker-job"
   description = "every hour"
-  schedule    = "* * * * 1"
+  schedule    = "0 * * * *"
   time_zone   = "Asia/Tokyo"
   region      = "asia-northeast1"
 
