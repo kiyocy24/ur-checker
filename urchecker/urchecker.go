@@ -18,7 +18,7 @@ type Payload struct {
 
 func urChecker(ctx context.Context, m PubSubMessage) error {
 	var p Payload
-	err := json.Unmarshal(m.Data, p)
+	err := json.Unmarshal(m.Data, &p)
 	if err != nil {
 		log.Fatal(err)
 	}
