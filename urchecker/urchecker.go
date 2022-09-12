@@ -16,7 +16,7 @@ type Payload struct {
 	KeyWord string   `json:"keyWord"`
 }
 
-func urChecker(ctx context.Context, m PubSubMessage) error {
+func UrCheck(ctx context.Context, m PubSubMessage) error {
 	var p Payload
 	err := json.Unmarshal(m.Data, &p)
 	if err != nil {
