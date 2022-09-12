@@ -3,7 +3,9 @@ package urchecker
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -12,8 +14,9 @@ type PubSubMessage struct {
 }
 
 type Payload struct {
-	Urls    []string `json:"urls"`
-	KeyWord string   `json:"keyWord"`
+	Urls                []string `json:"urls"`
+	KeyWord             string   `json:"keyWord"`
+	NotificationMessage string   `json:"notificationMessage"`
 }
 
 func UrCheck(ctx context.Context, m PubSubMessage) error {
@@ -38,7 +41,11 @@ func UrCheck(ctx context.Context, m PubSubMessage) error {
 		}
 
 		if strings.Contains(s, keyWord) {
-			log.Printf("key word: %s is found", keyWord)
+			notificationMessage := fmt.Sprintf("%s\n%s", p.NotificationMessage, u)
+			err := Notification(os.Getenv("LINE_SECRET"), os.Getenv("LINE_TOKEN"), notificationMessage)
+			if err != nil {
+				return err
+			}
 		} else {
 			log.Printf("key word: %s is found!", keyWord)
 		}
