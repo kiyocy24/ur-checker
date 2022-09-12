@@ -44,9 +44,9 @@ func urChecker(ctx context.Context, e event.Event) error {
 		}
 
 		if strings.Contains(s, keyWord) {
-			log.Printf("key word: %s is found", keyWord)
-		} else {
 			log.Printf("key word: %s is found!", keyWord)
+		} else {
+			log.Printf("key word: %s is not found...", keyWord)
 		}
 	}
 
