@@ -23,6 +23,9 @@ type PubSubMessage struct {
 }
 
 func urChecker(ctx context.Context, e event.Event) error {
+	log.Printf("e: %+v", e)
+	log.Printf("data: %+v", e.Data())
+
 	var msg MessagePublishedData
 	if err := e.DataAs(&msg); err != nil {
 		return fmt.Errorf("event.DataAs: %v", err)
