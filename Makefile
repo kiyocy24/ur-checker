@@ -17,3 +17,21 @@ decrypt_credential:
     --key "infra" \
     --plaintext-file ./terraform/credential.json \
     --ciphertext-file ./terraform/encrypted/credential.json.enc
+
+.phony: encrypt_tfvars
+encrypt_tfvars:
+	gcloud kms encrypt \
+    --location "asia-northeast1" \
+    --keyring "urchecker" \
+    --key "infra" \
+    --plaintext-file ./terraform/terraform.tfvars \
+    --ciphertext-file ./terraform/encrypted/terraform.tfvars.enc
+
+.phony: decrypt_tfvars
+decrypt_tfvars:
+	gcloud kms decrypt \
+    --location "asia-northeast1" \
+    --keyring "urchecker" \
+    --key "infra" \
+    --plaintext-file ./terraform/terraform.tfvars \
+    --ciphertext-file ./terraform/encrypted/terraform.tfvars.enc
