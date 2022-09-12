@@ -2,43 +2,35 @@ package urchecker
 
 import (
 	"context"
-	"fmt"
-	"github.com/GoogleCloudPlatform/functions-framework-go/functions"
-	"github.com/cloudevents/sdk-go/v2/event"
+	"encoding/json"
 	"log"
 	"strings"
 )
 
-func init() {
-	functions.CloudEvent("urChecker", urChecker)
-}
-
-type MessagePublishedData struct {
-	Message PubSubMessage
-}
-
 type PubSubMessage struct {
+	Data []byte `json:"data"`
+}
+
+type Payload struct {
 	Urls    []string `json:"urls"`
 	KeyWord string   `json:"keyWord"`
 }
 
-func urChecker(ctx context.Context, e event.Event) error {
-	log.Printf("e: %+v", e)
-	log.Printf("data: %+v", e.Data())
-
-	var msg MessagePublishedData
-	if err := e.DataAs(&msg); err != nil {
-		return fmt.Errorf("event.DataAs: %v", err)
+func urChecker(ctx context.Context, m PubSubMessage) error {
+	var p Payload
+	err := json.Unmarshal(m.Data, p)
+	if err != nil {
+		log.Fatal(err)
 	}
-	log.Printf("%+v", msg)
+	log.Printf("%+v", p)
 
-	if msg.Message.KeyWord == "" {
+	if p.KeyWord == "" {
 		log.Println("key word is not set")
 		return nil
 	}
 
-	urls := msg.Message.Urls
-	keyWord := msg.Message.KeyWord
+	urls := p.Urls
+	keyWord := p.KeyWord
 
 	for _, u := range urls {
 		s, err := httpRequest(u)
