@@ -4,13 +4,13 @@ resource "google_service_account" "github_actions" {
 }
 
 resource "google_project_iam_member" "github_actions" {
-  project  = "kiyocy24"
-  member   = "serviceAccount:github-actions@kiyocy24.iam.gserviceaccount.com"
+  project = "kiyocy24"
+  member  = "serviceAccount:github-actions@kiyocy24.iam.gserviceaccount.com"
   for_each = toset([
     "roles/cloudfunctions.admin",
     "roles/iam.serviceAccountUser",
   ])
-  role     = each.key
+  role = each.key
 }
 
 resource "google_service_account_iam_member" "github_account_iam" {

@@ -29,6 +29,6 @@ jobs:
         region: 'asia-northeast1'
         entry_point: 'UrCheck'
         source_dir: 'urchecker'
+        secret_environment_variables: 'LINE_TOKEN=projects/625646421163/secrets/secret-version/versions/1,LINE_SECRET_projects/625646421163/secrets/secret-version/versions/2'
         event_trigger_type: 'providers/cloud.pubsub/eventTypes/topic.publish'
         event_trigger_resource: '${{ secrets.DEPLOY_CF_EVENT_PUBSUB_TOPIC }}'
-
