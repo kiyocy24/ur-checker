@@ -27,7 +27,7 @@ jobs:
         name: 'urchecker'
         runtime: 'go116'
         region: 'asia-northeast1'
-        entry_point: 'urChecker'
+        entry_point: 'UrCheck'
         source_dir: 'urchecker'
         event_trigger_type: 'providers/cloud.pubsub/eventTypes/topic.publish'
         event_trigger_resource: '${{ secrets.DEPLOY_CF_EVENT_PUBSUB_TOPIC }}'
