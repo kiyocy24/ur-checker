@@ -7,6 +7,6 @@ resource "google_cloud_scheduler_job" "urchecker" {
 
   pubsub_target {
     topic_name = google_pubsub_topic.urchecker.id
-    data       = base64encode("{\"keyWord\":\"当サイトからご案内できる空室はございません\",\"urls\":[\"https://www.ur-net.go.jp/chintai/kanto/kanagawa/40_3840.html\"]}")
+    data       = base64encode("{\"keyWord\":\"当サイトからご案内できる空室はございません\",\"urls\":[\"https://www.ur-net.go.jp/chintai/kanto/kanagawa/40_3840.html\"],\"notificationMessage\":\"空室が見つかりました\"}")
   }
 }
