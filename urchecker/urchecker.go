@@ -38,9 +38,9 @@ func UrCheck(ctx context.Context, m PubSubMessage) error {
 		}
 
 		if strings.Contains(s, keyWord) {
-			log.Printf("key word: %s is found", keyWord)
-		} else {
 			log.Printf("key word: %s is found!", keyWord)
+		} else {
+			log.Printf("key word: %s is not found...", keyWord)
 		}
 	}
 
