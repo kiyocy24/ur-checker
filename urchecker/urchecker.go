@@ -22,7 +22,6 @@ func UrCheck(ctx context.Context, m PubSubMessage) error {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("%+v", p)
 
 	if p.KeyWord == "" {
 		log.Println("key word is not set")
