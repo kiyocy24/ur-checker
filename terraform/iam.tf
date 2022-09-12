@@ -13,6 +13,16 @@ resource "google_project_iam_member" "github_actions" {
   role = each.key
 }
 
+resource "google_project_iam_member" "appspot" {
+  project = "kiyocy24"
+  member  = "serviceAccount:kiyocy24@appspot.gserviceaccount.com"
+  for_each = toset([
+    "roles/iam.serviceAccountUser",
+    "roles/secretmanager.secretAccessor",
+  ])
+  role = each.key
+}
+
 resource "google_service_account_iam_member" "github_account_iam" {
   service_account_id = google_service_account.github_actions.name
   role               = "roles/iam.workloadIdentityUser"
