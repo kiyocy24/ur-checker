@@ -4,6 +4,7 @@ resource "google_cloud_scheduler_job" "urchecker" {
   schedule    = "0 * * * *"
   time_zone   = "Asia/Tokyo"
   region      = "asia-northeast1"
+  paused      = false
 
   pubsub_target {
     topic_name = google_pubsub_topic.urchecker.id
